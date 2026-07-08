@@ -1,0 +1,34 @@
+# =============================================================================
+# Stage 2 — CoOp 학습된 physical-property 프롬프트 기반 이상 속성 분류
+# =============================================================================
+# 학습된 CoOp 체크포인트(coop_dtd_best_ctx_3.pt)의 learned context 벡터 + physical
+# property 클래스명으로 CLIP text encoder 를 태워 Stage 1 candidate crop 을
+# 분류한다 (자연어 완성 문장 zero-shot 이 아니라, 학습된 soft prompt).
+# 이 파일은 CLI(scripts/run_stage2.py)용이며, Streamlit(pages/2_Stage2.py)은
+# 같은 파라미터를 사이드바에서 직접 받는다.
+
+stage1_dir: "./outputs/stage1/"
+# Stage 1의 run_name과 일치해야 함 (category_output_dirs 의 run_name).
+# Stage 1이 <stage1_dir>/<category>/<run_name>/candidates/*.json 에 저장하므로,
+# Stage 2는 <stage1_dir>/<category>/<stage1_tag>/candidates/ 를 그대로 찾는다.
+stage1_tag: "default"
+
+category: "grid"
+output_dir: "./outputs/stage2/"
+
+checkpoint: "./coop_dtd_best_ctx_3.pt"   # CoOp 학습된 physical-property 체크포인트
+seed: 42
+device: "cuda"                            # cuda -> mps -> cpu 자동 폴백
+
+# ---- padded-crop geometry (pad context 후 CLIP 자체 전처리로 resize) --------
+crop:
+  padding_ratio: 1.0               # 여백 = padding_ratio * max(bbox_w, bbox_h)
+  padding_px: null                 # 지정 시 padding_ratio 대신 고정 픽셀 여백 사용
+  min_crop_size: 64                # 패딩 crop 최소 한 변 길이 (px)
+  square: true                     # 정사각형 crop 강제
+
+topk: 5
+
+visualization:
+  save_crop: true          # padded crop 이미지 저장
+  save_topk_bar: true      # Top-K 막대그래프 저장

@@ -1,0 +1,28 @@
+# 대용량/외부 자산 — 라이선스 동의 후 별도로 받아야 함 (README 참고)
+/data/
+/weights/
+/third_party/dinov3/
+
+# 실행 결과물
+/outputs/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+.pytest_cache/
+
+# 가상환경
+.venv/
+venv/
+env/
+
+# OS / 에디터
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Streamlit
+.streamlit/secrets.toml

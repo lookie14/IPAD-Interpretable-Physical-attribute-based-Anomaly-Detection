@@ -1,0 +1,30 @@
+
+
+
+{
+    "normal" : "a clean image  with a normal, defect-free surface and no abnormality",
+    "crack":"an image  showing a thin cracked line splitting the surface apart",
+    "scratch_abrasion":"an image  showing a shallow scratch or abrasion mark scraped across the surface",
+    "cut":"an image  showing a sharp straight cut slicing through the material",
+    "hole_perforation":"an image  showing a small hole or puncture where material is missing and the background shows through",
+    "dent_depression":"an image  showing a dented, pushed-in depression on the surface",
+    "protrusion_bump_bulge":"an image  showing a raised bump or bulge protruding outward from the surface",
+    "swelling":"an image  showing a swollen, puffed-up region rising above the surrounding surface",
+
+    "bending_deformation":"an image  showing a structure that is still continuous but bent or warped out of alignment",
+    "asymmetry_shape_imbalance":"an image  showing an asymmetric region with an unevenly balanced shape",
+    "irregular_contour_boundary_distortion":"an image  showing a boundary contour that is irregular and distorted in outline",
+    "crease_fold":"an image  showing a creased or folded line pressed into the material",
+    "embedded_particle_lint":"an image  showing a foreign particle or piece of lint embedded on the surface",
+    "bubble_inclusion":"an image  showing a trapped air bubble bulging beneath the surface",
+    "burn":"an image  showing a burned or scorched discolored mark",
+    "thermal_melt":"an image  showing a melted, softened region caused by heat damage",
+    "imprint_defect":"an image  showing a smudged or misaligned printed imprint",
+    "color_change": "an image  showing a discolored  whose color differs from the surrounding area",
+    "brightness_increase": "an image  showing an unusually bright, overexposed-looking spot",
+    "brightness_decrease": "an image  showing an unusually dark, shadowed-looking spot",
+  
+    "opacity_density_increase": "an image  showing a denser, more opaque-looking  than its surroundings",
+    "opacity_density_decrease": "an image  showing a thinner, more transparent or sparse-looking  than its surroundings"
+}
+

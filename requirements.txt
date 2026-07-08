@@ -1,0 +1,17 @@
+# Stage 1 dependencies (torchvision / opencv are intentionally NOT required)
+torch>=2.0
+numpy
+pyyaml
+pillow
+matplotlib
+scikit-image  # rotation.py: 회전 정렬 (warp_polar, phase_cross_correlation 등)
+scipy         # rotation.py / rotation_adapter.py: center_of_mass, ndimage.shift
+rembg         # optional: rotation matte(누끼) — rotation.matte=true 일 때만 필요
+
+# Stage 2 dependencies (CoOp 학습된 physical-property 프롬프트, coop_dtd_best_ctx_3.pt)
+ftfy          # openai/CLIP 토크나이저
+regex         # openai/CLIP 토크나이저
+git+https://github.com/openai/CLIP.git  # openai 원본 clip 패키지 (load_dtd_prompts.py 가 사용)
+
+# Stage 3 (streamlit UI) dependencies
+streamlit
