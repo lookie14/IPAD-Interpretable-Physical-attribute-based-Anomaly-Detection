@@ -60,6 +60,11 @@ with st.sidebar:
 
     st.header("결과")
     top_k = st.slider("Top-K", 1, 20, 5)
+    sem_score_threshold = st.slider(
+        "sem_score threshold", 0.0, 1.0, 0.0, 0.01,
+        help="CoOp 예측 확신도(sem_score)가 이 값 미만인 region은 결과에서 제외됩니다 "
+             "(Stage 3에도 전달되지 않습니다). 0이면 필터링 없음.",
+    )
 
 
 run = st.button("Stage 2 실행", type="primary")
@@ -96,9 +101,15 @@ with st.spinner("crop + CoOp 분류 중..."):
         min_crop_size=int(min_crop_size),
         square=square,
         top_k=int(top_k),
+        sem_score_threshold=float(sem_score_threshold),
     )
 
-st.success(f"{len(regions)}개 region 분류 완료.")
+st.success(
+    f"{len(regions)}개 region 분류 완료."
+    + (f" (sem_score < {sem_score_threshold:.2f} 인 candidate는 제외됨)" if sem_score_threshold > 0 else "")
+)
+if not regions:
+    st.warning("threshold를 넘는 region이 없습니다. Stage 3에 넘길 것이 없습니다.")
 
 # ── TypedRegion 결과 ──────────────────────────────────────────────────
 st.subheader(f"TypedRegion 결과 ({len(regions)}개, geo_score 내림차순)")

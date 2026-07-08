@@ -54,8 +54,13 @@ def process_candidates(
     min_crop_size: int = 64,
     square: bool = True,
     top_k: int = 5,
+    sem_score_threshold: float = 0.0,
 ) -> List[Dict[str, Any]]:
     """Stage 1 candidate 각각 -> padded crop -> CoOp CLIP 분류 -> TypedRegion.
+
+    sem_score_threshold: 이 값 미만인 region(= CoOp 예측 확신도가 낮은 candidate)은
+    결과에서 제외한다. Stage 3는 이 함수의 반환값만 이어받으므로, 여기서 거르면
+    Stage 3에도 자동으로 나타나지 않는다.
 
     Returns:
         list[TypedRegion] (geo_score 내림차순), 각 원소::
@@ -103,6 +108,9 @@ def process_candidates(
             "topk": topk_results,
             "padded_crop": padded_crop,
         })
+
+    if sem_score_threshold > 0.0:
+        regions = [r for r in regions if r["sem_score"] >= sem_score_threshold]
 
     regions.sort(key=lambda r: r["geo_score"], reverse=True)
     return regions

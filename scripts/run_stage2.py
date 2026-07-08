@@ -73,6 +73,7 @@ def main() -> None:
     crop_cfg = cfg["crop"]
     vis = cfg.get("visualization", {})
     top_k = int(cfg.get("topk", 5))
+    sem_score_threshold = float(cfg.get("sem_score_threshold", 0.0))
 
     classifier = build_classifier(cfg["checkpoint"], device)
     print(f"[s2] CoOp checkpoint = {cfg['checkpoint']} "
@@ -103,8 +104,10 @@ def main() -> None:
             min_crop_size=int(crop_cfg.get("min_crop_size", 64)),
             square=bool(crop_cfg.get("square", True)),
             top_k=top_k,
+            sem_score_threshold=sem_score_threshold,
         )
-        print(f"[s2] {name}: {len(candidates)} Stage-1 patches -> {len(regions)} regions")
+        print(f"[s2] {name}: {len(candidates)} Stage-1 patches -> {len(regions)} regions "
+              f"(sem_score_threshold={sem_score_threshold})")
 
         image_dir = os.path.join(out_root, name)
         ensure_dir(image_dir)

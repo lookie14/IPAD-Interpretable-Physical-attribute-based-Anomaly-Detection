@@ -29,6 +29,11 @@ crop:
 
 topk: 5
 
+# CoOp 예측 확신도(sem_score = attr_probs[pred_attr])가 이 값 미만인 candidate는
+# 결과(regions.json)에서 제외한다 -- Stage 3도 이 파일만 이어받으므로 자동으로
+# 걸러진다. 0이면 필터링 없음.
+sem_score_threshold: 0.0
+
 visualization:
   save_crop: true          # padded crop 이미지 저장
   save_topk_bar: true      # Top-K 막대그래프 저장
